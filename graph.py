@@ -24,7 +24,7 @@ def dU_dx(U, x):
     # Here U is a vector such that y=U[0] and z=U[1]. This function should return [y', z']
     return [U[1], -U[0] + x*np.exp(-x)]
 U0 = [1, 0]
-xs = np.linspace(0, 2, 200)
+xs = np.linspace(0, 2, 201)
 Us = odeint(dU_dx, U0, xs)
 ys = Us[:,0]
 data=np.loadtxt ("points.txt")
@@ -52,5 +52,18 @@ plt.plot(data[:,0], data[:,1]-data[:,3],color='red')
 plt.plot(data[:,0], data[:,2]-data[:,4],color='blue')
 plt.plot(data[:,1], data[:,2]-data[:,4],color='green')
 plt.title("Zadacha Koshi, raznost graph, red- y(x), blue- y'(x), green- y'(y)")
+
+pylab.show()
+
+data=np.loadtxt ("points.txt")
+pylab.minorticks_on()
+pylab.grid(color="black", which="major", linewidth=1)
+pylab.grid(color="black", which="minor", linestyle=":", linewidth=0.5)
+plt.xlabel("x")
+plt.ylabel("y(x)")
+plt.plot(xs, data[:,1]-Us[:,0],color='red')
+plt.plot(xs, data[:,2]-Us[:,1],color='blue')
+plt.plot(Us[:,0], data[:,2]-Us[:,1],color='green')
+plt.title("Zadacha Koshi,vstroen f-ya, raznost graph, red- y(x), blue- y'(x), green- y'(y)")
 
 pylab.show()
